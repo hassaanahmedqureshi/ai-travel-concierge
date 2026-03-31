@@ -23,34 +23,34 @@ LOCATIONS_JSON:[{"name":"Place Name","lat":0.0,"lng":0.0},...]
 
 Include 5-10 key locations from the itinerary. Only real coordinates.`;
 
-// export async function POST(req: NextRequest) {
-//     const { messages } = await req.json();
-//
-//     const model = genAI.getGenerativeModel({
-//         model: "gemini-2.5-flash",
-//         systemInstruction: SYSTEM_PROMPT,
-//     });
-//
-//     const history = messages.slice(0, -1).map((m: { role: string; content: string }) => ({
-//         role: m.role === "assistant" ? "model" : "user",
-//         parts: [{ text: m.content }],
-//     }));
-//
-//     const chat = model.startChat({ history })
-//     const lastMessage = messages[messages.length - 1].content;
-//
-//     const result = await chat.sendMessage(lastMessage);
-//     const raw = result.response.text();
-//
-//     const jsonMatch = raw.match(/LOCATIONS_JSON:(\[.*?])/s);
-//     const locations = jsonMatch ? JSON.parse(jsonMatch[1]) : [];
-//     const content = raw.replace(/LOCATIONS_JSON:\[.*?]/s, "").trim();
-//
-//     return NextResponse.json({ role: "assistant", content, locations });
-//
-// }
+export async function POST(req: NextRequest) {
+    const { messages } = await req.json();
 
-export async function POST() {
-    await new Promise((r) => setTimeout(r, 800)); // simulate delay
-    return NextResponse.json(MOCK_RESPONSE);
+    const model = genAI.getGenerativeModel({
+        model: "gemini-2.5-flash",
+        systemInstruction: SYSTEM_PROMPT,
+    });
+
+    const history = messages.slice(0, -1).map((m: { role: string; content: string }) => ({
+        role: m.role === "assistant" ? "model" : "user",
+        parts: [{ text: m.content }],
+    }));
+
+    const chat = model.startChat({ history })
+    const lastMessage = messages[messages.length - 1].content;
+
+    const result = await chat.sendMessage(lastMessage);
+    const raw = result.response.text();
+
+    const jsonMatch = raw.match(/LOCATIONS_JSON:(\[.*?])/s);
+    const locations = jsonMatch ? JSON.parse(jsonMatch[1]) : [];
+    const content = raw.replace(/LOCATIONS_JSON:\[.*?]/s, "").trim();
+
+    return NextResponse.json({ role: "assistant", content, locations });
+
 }
+
+// export async function POST() {
+//     await new Promise((r) => setTimeout(r, 800)); // simulate delay
+//     return NextResponse.json(MOCK_RESPONSE);
+// }
