@@ -59,7 +59,7 @@ export default function ChatPanel({ messages, loading, onSend }: Props) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Describe your trip..."
-            style={{ flex: 1, minWidth: 0, borderRadius: "999px", border: "1px solid #e4e4e7", background: "#f4f4f5", padding: "8px 16px", fontSize: "13px", outline: "none", fontFamily: "inherit" }}
+            style={{ flex: 1, minWidth: 0, borderRadius: "999px", border: "1px solid #e4e4e7", background: "#f4f4f5", padding: "8px 16px", fontSize: "13px", outline: "none", fontFamily: "inherit", color: "#18181b" }}
           />
           <button
             type="submit"
