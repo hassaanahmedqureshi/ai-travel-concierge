@@ -5,18 +5,25 @@ export default function MessageBubble({ message }: { message: Message }) {
   const isUser = message.role === "user";
 
   return (
-    <div className={`flex flex-col ${isUser ? "items-end" : "items-start"}`}>
-      <div className={`max-w-[90%] rounded-2xl px-3 py-2 text-sm leading-relaxed ${
-        isUser
-          ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 whitespace-pre-wrap"
-          : "bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700"
-      }`}>
+    <div style={{ display: "flex", justifyContent: isUser ? "flex-end" : "flex-start", width: "100%" }}>
+      <div style={{
+        maxWidth: "85%",
+        borderRadius: "16px",
+        padding: "8px 12px",
+        fontSize: "13px",
+        lineHeight: 1.6,
+        wordBreak: "break-word",
+        overflowWrap: "anywhere",
+        background: isUser ? "#18181b" : "#fff",
+        color: isUser ? "#fff" : "#3f3f46",
+        border: isUser ? "none" : "1px solid #e4e4e7",
+      }}>
         {isUser ? message.content : (
           <ReactMarkdown components={{
-            p: ({ children }) => <p className="mb-1.5 last:mb-0">{children}</p>,
-            strong: ({ children }) => <strong className="font-semibold text-zinc-900 dark:text-zinc-50">{children}</strong>,
-            ul: ({ children }) => <ul className="space-y-1 my-1.5">{children}</ul>,
-            li: ({ children }) => <li className="flex gap-2"><span className="text-zinc-400">•</span><span>{children}</span></li>,
+            p: ({ children }) => <p style={{ marginBottom: "6px" }}>{children}</p>,
+            strong: ({ children }) => <strong style={{ fontWeight: 700, color: "#18181b" }}>{children}</strong>,
+            ul: ({ children }) => <ul style={{ margin: "6px 0" }}>{children}</ul>,
+            li: ({ children }) => <li style={{ marginBottom: "4px", paddingLeft: "12px" }}>• {children}</li>,
           }}>
             {message.content}
           </ReactMarkdown>

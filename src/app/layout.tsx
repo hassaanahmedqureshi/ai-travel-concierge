@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const nunitoSans = Nunito_Sans({
+  variable: "--font-nunito-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "AI Travel Concierge",
@@ -13,8 +16,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-      <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="h-screen overflow-hidden">{children}</body>
-      </html>
+    <html lang="en" className={nunitoSans.variable}>
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+      </head>
+      <body className="h-screen overflow-hidden font-[family-name:var(--font-nunito-sans)]">
+        {children}
+      </body>
+    </html>
   );
 }

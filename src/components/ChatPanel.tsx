@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import MessageBubble from "./MessageBubble";
 import { Message } from "@/lib/types";
@@ -24,26 +26,25 @@ export default function ChatPanel({ messages, loading, onSend }: Props) {
   }
 
   return (
-    <div className="flex flex-col w-[400px] flex-shrink-0 border-r border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950">
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", width: "100%", overflow: "hidden", background: "#fafafa" }}>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+      <div style={{ flex: 1, overflowY: "auto", overflowX: "hidden", padding: "16px", display: "flex", flexDirection: "column", gap: "10px" }}>
         {messages.length === 0 && (
-          <div className="text-center text-zinc-400 mt-16 px-4">
-            <p className="text-3xl mb-3">🌍</p>
-            <p className="text-sm font-medium text-zinc-600 dark:text-zinc-300">Where do you want to go?</p>
-            <p className="text-xs mt-2 text-zinc-400 leading-relaxed">
-              Try: "5 days in Sicily, budget traveler, love food and hiking"
-            </p>
+          <div style={{ textAlign: "center", marginTop: "60px", color: "#a1a1aa" }}>
+            <span className="material-symbols-outlined" style={{ fontSize: "48px", color: "#d4d4d8", display: "block", marginBottom: "12px" }}>travel_explore</span>
+            <p style={{ fontSize: "14px", fontWeight: 600, color: "#52525b" }}>Where do you want to go?</p>
+            <p style={{ fontSize: "12px", marginTop: "8px", lineHeight: 1.6 }}>Try: &quot;5 days in Sicily, budget traveler, love food and hiking&quot;</p>
           </div>
         )}
 
         {messages.map((m, i) => <MessageBubble key={i} message={m} />)}
 
         {loading && (
-          <div className="flex justify-start">
-            <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl px-3 py-2 text-sm text-zinc-400 flex items-center gap-2">
-              <span className="animate-pulse">✈️</span> Planning your trip...
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <div style={{ background: "#fff", border: "1px solid #e4e4e7", borderRadius: "16px", padding: "8px 12px", fontSize: "13px", color: "#a1a1aa", display: "flex", alignItems: "center", gap: "6px" }}>
+              <span className="material-symbols-outlined" style={{ fontSize: "16px" }}>flight_takeoff</span>
+              Planning your trip...
             </div>
           </div>
         )}
@@ -52,19 +53,20 @@ export default function ChatPanel({ messages, loading, onSend }: Props) {
       </div>
 
       {/* Input */}
-      <div className="flex-shrink-0 border-t border-zinc-200 dark:border-zinc-800 px-3 py-3 bg-white dark:bg-zinc-900">
-        <form onSubmit={handleSubmit} className="flex gap-2">
+      <div style={{ flexShrink: 0, borderTop: "1px solid #e4e4e7", padding: "12px 16px", background: "#fff" }}>
+        <form onSubmit={handleSubmit} style={{ display: "flex", gap: "8px" }}>
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Describe your trip..."
-            className="flex-1 rounded-full border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-zinc-400 dark:text-zinc-100 placeholder:text-zinc-400"
+            style={{ flex: 1, minWidth: 0, borderRadius: "999px", border: "1px solid #e4e4e7", background: "#f4f4f5", padding: "8px 16px", fontSize: "13px", outline: "none", fontFamily: "inherit" }}
           />
           <button
             type="submit"
             disabled={loading || !input.trim()}
-            className="rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-4 py-2 text-sm font-medium disabled:opacity-40 hover:opacity-80 transition-opacity"
+            style={{ flexShrink: 0, borderRadius: "999px", background: "#18181b", color: "#fff", padding: "8px 16px", fontSize: "13px", fontWeight: 600, border: "none", cursor: "pointer", display: "flex", alignItems: "center", gap: "4px", opacity: loading || !input.trim() ? 0.4 : 1, fontFamily: "inherit" }}
           >
+            <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>send</span>
             Send
           </button>
         </form>

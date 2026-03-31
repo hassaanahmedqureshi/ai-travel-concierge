@@ -1,13 +1,10 @@
 export default function Header() {
   return (
-    <header className="flex-shrink-0 flex items-center gap-3 border-b border-zinc-200 dark:border-zinc-800 px-6 py-3 bg-white dark:bg-zinc-950">
-      <span className="text-2xl">✈️</span>
-      <div>
-        <h1 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 leading-tight">
-          AI Travel Concierge
-        </h1>
-        <p className="text-xs text-zinc-400">Describe your trip, get a personalized itinerary</p>
-      </div>
+    <header style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", borderBottom: "1px solid #e4e4e7", padding: "14px 24px", background: "#fff" }}>
+      <span className="material-symbols-outlined" style={{ color: "#3f3f46" }}>airlines</span>
+      <h1 style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "#18181b" }}>
+        AI Travel Concierge
+      </h1>
     </header>
   );
 }
