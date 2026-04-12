@@ -5,3 +5,10 @@ export type Message = {
   content: string;
   locations?: Location[];
 };
+
+export type Itinerary = {
+  id: string;
+  title: string;
+  content: string;
+  created_at: string;
+};
