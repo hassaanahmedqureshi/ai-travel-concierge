@@ -5,8 +5,6 @@ import dynamic from "next/dynamic";
 import Header from "@/components/Header";
 import ChatPanel from "@/components/ChatPanel";
 import { Message, Location } from "@/lib/types";
-import {supabase} from "@/lib/supabase";
-import {router} from "next/client";
 
 const MapView = dynamic(() => import("@/components/MapView"), { ssr: false });
 
@@ -42,14 +40,6 @@ export default function Home() {
     setMessages((prev) => [...prev, data]);
     if (data.locations?.length > 0) setActiveLocations(data.locations);
     setLoading(false);
-  }
-
-  async function handleSave(content: string, locations: Location[]) {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { router.push("/login"); return; }
-    const title = content.split("\n")[0].replace(/\*+/g, "").trim().slice(0, 60);
-    await supabase.from("itineraries").insert({ user_id: user.id, title, content, locations });
-    alert("Itinerary saved!");
   }
 
   return (
